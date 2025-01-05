@@ -1,19 +1,46 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
 const { frontmatter } = Astro.props;
+import BaseLayout from "./BaseLayout.astro";
+
+// interface Frontmatter {
+//   title: string;
+//   pubDate: Date;
+//   author: string;
+//   image: {
+//     url: string;
+//     alt: string;
+//   };
+//   tags: string[];
+// }
+
+// export async function getStaticPaths() {
+//   const allPost = Object.values(
+//     import.meta.glob("../posts/*.md", { eager: true })
+//   );
+
+//   return allPost?.map((post: any) => {
+//     return {
+//       frontmatter: post?.frontmatter,
+//     };
+//   });
+// }
+// const { frontmatter }: { frontmatter: Frontmatter } = Astro.props;
+// console.log("frontmatter", frontmatter?.tags);
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
-  <!-- <h1>{frontmatter.title}</h1> -->
+<BaseLayout pageTitle={frontmatter?.title}>
+  <p>Published on: {frontmatter?.pubDate.toString().slice(0, 10)}</p>
+  <p>written by {frontmatter?.author}</p>
 
-  <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
-  <p>written by {frontmatter.author}</p>
-
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+  <img
+    src={frontmatter?.image?.url}
+    width="300"
+    alt={frontmatter?.image?.alt}
+  />
 
   <div class="tags">
     {
-      frontmatter.tags.map((tag: string) => (
+      frontmatter?.tags.map((tag: string) => (
         <p class="tag">
           <a href={`/tags/${tag}`}>{tag}</a>
         </p>
@@ -22,7 +49,6 @@ const { frontmatter } = Astro.props;
   </div>
   <slot />
 </BaseLayout>
-
 <style>
   a {
     color: #00539f;
