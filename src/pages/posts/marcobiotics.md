@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/MarkdownPostLayout.astro
+layout: ../layouts/MarkDownPostLayout.astro
 title: "About Macrobiotics"
 description: "Osawa sama, browne rice is very good for your healthy"
 pubDate: 2025-01-01
