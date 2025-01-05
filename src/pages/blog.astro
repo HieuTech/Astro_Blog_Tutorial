@@ -1,0 +1,39 @@
+---
+import BlogPost from "../components/BlogPost.astro";
+import BaseLayout from "./layouts/BaseLayout.astro";
+//query data from local file
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+);
+const papeTitle = "My Astro Learning Blog";
+---
+
+<BaseLayout pageTitle={papeTitle}>
+  <ul>
+    <!-- <li><a href="/posts/post-1">Post 1</a></li>
+    <li><a href="/posts/post-2">Post 2</a></li>
+    <li><a href="/posts/post-3">Post 3</a></li> -->
+
+    {
+      allPosts.map((post: any) => {
+        return <BlogPost url={post.url} title={post.frontmatter.title} />;
+      })
+    }
+  </ul>
+
+  <h2>... and my new Astro site!</h2>
+
+  <p>
+    I am working through Astro's introductory tutorial. This is the second page
+    on my website, and it's the first one I built myself!
+  </p>
+
+  <p>
+    This site will update as I complete more of the tutorial, so keep checking
+    back and see how my journey is going!
+  </p>
+</BaseLayout>
+
+<script>
+  import "../scripts/menu.js";
+</script>
